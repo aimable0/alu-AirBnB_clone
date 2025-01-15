@@ -36,8 +36,24 @@ class TestBaseModel(unittest.TestCase):
         # created_at of dict returned by to_dict and basemodelclass _dict_
         self.assertIs(type(instance_dict["created_at"]), str)
         self.assertIs(type(self.sample_base.__dict__["created_at"]), datetime)
+
+        # testing difference between:
+        # updated_at of dict returned by to_dict() and basemodelclass _dict_
         self.assertIs(type(instance_dict["updated_at"]), str)
         self.assertIs(type(self.sample_base.__dict__["updated_at"]), datetime)
+
+    def test__str__(self):
+        # check if the string is returned using __str__ method
+        self.assertEqual(type(self.sample_base.__str__()), str)
+
+        # check if the name of the class is in the returned string.
+        self.assertIn("BaseModel", self.sample_base.__str__())
+
+        # check if id is returned in the string
+        self.assertIn(self.sample_base.id, self.sample_base.__str__())
+
+        # check if __dict__ attributes in string returned by __str__
+        self.assertIn(str(self.sample_base.__dict__), self.sample_base.__str__())
 
 
 if __name__ == "__main__":
