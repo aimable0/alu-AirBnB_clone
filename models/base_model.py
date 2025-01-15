@@ -1,6 +1,6 @@
 from uuid import uuid4
 from datetime import datetime
-
+from __init__ import storage
 
 class BaseModel:
     """_summary_
@@ -22,6 +22,8 @@ class BaseModel:
                         setattr(self, key, datetime.fromisoformat(value))
                     else:
                         setattr(self, key, value)
+        else:
+            storage.new(self)
 
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
@@ -29,6 +31,7 @@ class BaseModel:
     # public methods.
     def save(self):
         """updates the public instance attribute updated_at with the current datetime"""
+        storage.save()
         self.updated_at = datetime.today()
 
     def to_dict(self):

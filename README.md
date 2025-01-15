@@ -11,13 +11,16 @@ Airbnb clone project is a web application designed to replicate the core functio
 --MORE TO BE ADDED---
 
 #TECHNOLOGIES USED
-.Frontend: <<added>> 
+.Frontend: <<added>>
 .Backend: <<added>>
 .Database: <<added>>
 .Other: <<added>>
 
 #LIBRARIES
--<<to be added>>
+-cmd module
+-datetime
+-unittest
+-<< more to be added>>
 
 #INSTALLATION
 --steps to be published---
