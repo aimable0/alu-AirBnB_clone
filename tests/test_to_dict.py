@@ -3,8 +3,8 @@ import os
 import unittest
 import datetime
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from base_model import BaseModel
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from ..models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
