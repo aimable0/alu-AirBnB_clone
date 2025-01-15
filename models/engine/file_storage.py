@@ -1,27 +1,34 @@
+#!/usr/bin/python3
 import json
 
 
 class FileStorage:
     ...
 
-    def __init__(self):
-        self.__file_path = "file.json"
-        self.__objects = {}
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         return self.__objects
 
     def new(self, obj):
-        key = f"{obj["__class__"]}.{obj["id"]}"
+        key = f'{obj.to_dict()["__class__"]}.{obj.to_dict()["id"]}'
         self.__objects[key] = obj
 
     def save(self):
-        with open(self.__file_path, "w+") as file:
-            json.dump(self.__objects, file, indent=2)
+        json_objects = {}
+        for key in self.__objects.keys():
+            json_objects[key] = self.__objects[key].to_dict()
+        with open(self.__file_path, "w") as file:
+            json.dump(json_objects, file)
 
     def reload(self):
         try:
             with open(self.__file_path, "r") as file:
-                self.__objects = json.load(file)
+                obj_dict = json.load(file)
+                from base_model import BaseModel
+
+                for key in obj_dict.keys():
+                    self.__objects[key] = BaseModel(obj_dict[key])
         except FileNotFoundError:
             pass
