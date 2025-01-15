@@ -26,9 +26,8 @@ class FileStorage:
         try:
             with open(self.__file_path, "r") as file:
                 obj_dict = json.load(file)
-                from base_model import BaseModel
-
-                for key in obj_dict.keys():
-                    self.__objects[key] = BaseModel(obj_dict[key])
+                from models.base_model import BaseModel
+                for key in obj_dict:
+                    self.__objects[key] = BaseModel(**obj_dict[key])
         except FileNotFoundError:
             pass
