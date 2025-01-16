@@ -33,12 +33,18 @@ class TestFileStorage(unittest.TestCase):
             self.assertIsInstance(value, BaseModel)
 
     def test_all(self):
+        """Test that all returns the FileStorage.__objects attr"""
         storage = FileStorage()
         new_dict = storage.all()
         self.assertTrue(type(new_dict) is dict)
         self.assertIs(new_dict, storage._FileStorage__objects)
 
-    def test_new(self): ...
+    def test_new(self):
+        """test that new adds an object to the FileStorage.__objects attr"""
+        storage = FileStorage()
+        instance = BaseModel()
+        storage.new(instance)
+        self.assertIn(instance, (storage._FileStorage__objects).values())
 
     def test_save(self): ...
 
