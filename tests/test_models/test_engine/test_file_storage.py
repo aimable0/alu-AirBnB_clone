@@ -33,8 +33,7 @@ class TestFileStorage(unittest.TestCase):
             self.assertIsInstance(value, BaseModel)
 
     def test_all(self):
-        obj = self.storage.all()
-        self.assertTrue(type(obj) is dict)
+        self.assertTrue(type(self.storage.all()) is dict)
 
     def test_new(self): ...
 
