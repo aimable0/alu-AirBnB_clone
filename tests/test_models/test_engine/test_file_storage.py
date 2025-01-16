@@ -21,20 +21,20 @@ class TestFileStorage(unittest.TestCase):
 
     def test__file_path(self):
         """test if the file_path is valid or not"""
-
         # test whether _file_path is private
         try:
             with self.assertRaises(AttributeError):
                 file_path = self.storage.__file_path
         except:
-            raise Exception("Trying to assing file name didn't raise Attribute Error")
+            raise Exception("Trying to assign file name didn't raise Attribute Error")
 
     def test__objects(self):
         for value in self.storage.all().values():
             self.assertIsInstance(value, BaseModel)
 
-    def test_all(self): ...
-
+    def test_all(self):
+        obj = self.storage.all()
+        self.assertTrue(type(obj) is dict)
 
     def test_new(self): ...
 
