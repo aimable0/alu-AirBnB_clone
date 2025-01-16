@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-import cmd
-
 """
 HBNBCommand Module
 ===================
@@ -14,6 +12,8 @@ Features:
 Classes:
     - HBNBCommand: Defines the command-line interface.
 """
+
+import cmd
 
 
 class HBNBCommand(cmd.Cmd):
