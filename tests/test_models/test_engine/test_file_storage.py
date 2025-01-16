@@ -1,10 +1,7 @@
 import unittest
 from models.engine.file_storage import FileStorage
-import sys
-import os
+from models.base_model import BaseModel
 
-# # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
-# from models.base_model import BaseModel
 
 class TestFileStorage(unittest.TestCase):
     """A unit test class to test thouroughly the class FileStorage
@@ -15,7 +12,12 @@ class TestFileStorage(unittest.TestCase):
 
     def setUp(self):
         """an instance of storage to run tests on"""
+        self.new_model = BaseModel()
+        self.new_model.name = "Sample_Model"
+        self.new_model.my_number = 23
+        self.new_model.save()
         self.storage = FileStorage()
+        self.storage.reload()
 
     def test__file_path(self):
         """test if the file_path is valid or not"""
@@ -27,6 +29,19 @@ class TestFileStorage(unittest.TestCase):
         except:
             raise Exception("Trying to assing file name didn't raise Attribute Error")
 
+    def test__objects(self):
+        for value in self.storage.all().values():
+            self.assertIsInstance(value, BaseModel)
 
-        # valid file_path
-        # self.assertTrue(os.path.exists("alu-AirBnB_clone\fiale.json"))
+    def test_all(self): ...
+
+
+    def test_new(self): ...
+
+    def test_save(self): ...
+
+    def test_reload(self): ...
+
+
+if __name__ == "__main__":
+    unittest.main()
