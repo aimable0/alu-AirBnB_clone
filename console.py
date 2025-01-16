@@ -5,8 +5,8 @@ This module defines the command-line interpreter (CLI) for the Holberton BNB pro
 It uses the `cmd` module to create an interactive shell for managing application objects.
 
 Features:
-- Tab completion for commands.
-- Command history using the readline module.
+# - Tab completion for commands.
+# - Command history using the readline module.
 - Object creation, display, deletion, and more.
 
 Classes:
@@ -14,23 +14,23 @@ Classes:
 """
 
 import cmd
-import readline
-import rlcompleter
+# import readline
+# import rlcompleter
 from models.base_model import BaseModel
 from models import storage
-import json
+# import json
 
 # Enable tab completion
-readline.parse_and_bind("tab: complete")
+# readline.parse_and_bind("tab: complete")
 
 # Command history setup
-HISTORY_FILE = ".cmd_history"
+# HISTORY_FILE = ".cmd_history"
 
-try:
-    # Load command history if it exists
-    readline.read_history_file(HISTORY_FILE)
-except FileNotFoundError:
-    pass  # No history file found, proceed silently
+# try:
+#     # Load command history if it exists
+#     readline.read_history_file(HISTORY_FILE)
+# except FileNotFoundError:
+#     pass  # No history file found, proceed silently
 
 
 def inform_user_given_one_arg(arg):
@@ -220,4 +220,4 @@ if __name__ == "__main__":
     Initializes and starts the command loop.
     """
     HBNBCommand().cmdloop(intro="Welcome to Holberton BNB")
-    readline.write_history_file(HISTORY_FILE)
+    # readline.write_history_file(HISTORY_FILE)
