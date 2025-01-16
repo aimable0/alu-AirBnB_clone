@@ -3,6 +3,7 @@ from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 import json
 
+
 class TestFileStorage(unittest.TestCase):
     """A unit test class to test thouroughly the class FileStorage
 
@@ -57,7 +58,9 @@ class TestFileStorage(unittest.TestCase):
             objs = json.load(file)
             self.assertIn(instance.to_dict(), objs.values())
 
-    def test_reload(self): ...
+    def test_reload(self):
+        storage = FileStorage()
+        
 
 
 if __name__ == "__main__":

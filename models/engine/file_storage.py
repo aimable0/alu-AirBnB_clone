@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import json
 
+
 class FileStorage:
     ...
 
@@ -32,3 +33,7 @@ class FileStorage:
         except FileNotFoundError:
             pass
 
+    def delete(self, key):
+        """delete an instance for instance dict and save changes ot json file"""
+        self.__objects.__delitem__(key)
+        self.save()
