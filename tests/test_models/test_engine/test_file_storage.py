@@ -1,7 +1,7 @@
 import unittest
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
-
+import json
 
 class TestFileStorage(unittest.TestCase):
     """A unit test class to test thouroughly the class FileStorage
@@ -29,6 +29,7 @@ class TestFileStorage(unittest.TestCase):
             raise Exception("Trying to assign file name didn't raise Attribute Error")
 
     def test__objects(self):
+        """Test if objects contains base model instances."""
         for value in self.storage.all().values():
             self.assertIsInstance(value, BaseModel)
 
@@ -46,7 +47,15 @@ class TestFileStorage(unittest.TestCase):
         storage.new(instance)
         self.assertIn(instance, (storage._FileStorage__objects).values())
 
-    def test_save(self): ...
+    def test_save(self):
+        """Test that save properly saves objects to file.json"""
+        storage = FileStorage()
+        instance = BaseModel()
+        storage.new(instance)
+        storage.save()
+        with open("file.json", "r") as file:
+            objs = json.load(file)
+            self.assertIn(instance.to_dict(), objs.values())
 
     def test_reload(self): ...
 
