@@ -90,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             quit
         """
-        # print("Have a Good Day!")
+        print("Have a Good Day!")
         return True
 
     def do_EOF(self, arg):
@@ -208,5 +208,5 @@ if __name__ == "__main__":
     Entry point for the command-line interpreter.
     Initializes and starts the command loop.
     """
-    HBNBCommand().cmdloop(intro="Welcome to Holberton BNB")
+    HBNBCommand().cmdloop()
     readline.write_history_file(HISTORY_FILE)
