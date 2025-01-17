@@ -18,10 +18,16 @@ Classes:
 import cmd
 import readline
 import rlcompleter
+import json
+from models import storage
 from models.base_model import BaseModel
 from models.user import User
-from models import storage
-import json
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 # Enable tab completion
 readline.parse_and_bind("tab: complete")
@@ -144,12 +150,17 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             create <BaseModel> or <User>
         """
-        if arg.strip() == "BaseModel":
-            instance = BaseModel()
-            instance.save()
-            print(instance.id)
-        elif arg.strip() == "User":
-            instance = User()
+        set_instance = {
+            "BaseModel": BaseModel(),
+            "User": User(),
+            "State": State(),
+            "City": City(),
+            "Amenity": Amenity(),
+            "Place": Place(),
+            "Review": Review(),
+        }
+        if arg in set_instance.keys():
+            instance = set_instance[arg]
             instance.save()
             print(instance.id)
         else:
