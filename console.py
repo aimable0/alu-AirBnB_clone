@@ -50,7 +50,15 @@ def inform_user_given_one_arg(arg):
     """
     if arg == "":
         print("** class name missing **")
-    elif arg != "BaseModel" and arg != "User":
+    elif arg not in [
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Amenity",
+        "Place",
+        "Review",
+    ]:
         print("** class doesn't exist **")
     else:
         print("** instance id missing **")
@@ -67,7 +75,15 @@ def inform_user_given_two_arg(class_name):
         - "** class doesn't exist **" if the class name is invalid.
         - "** no instance found **" if the instance doesn't exist.
     """
-    if class_name != "BaseModel" and class_name != "User":
+    if class_name not in [
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Amenity",
+        "Place",
+        "Review",
+    ]:
         print("** class doesn't exist **")
     else:
         print("** no instance found **")
@@ -82,6 +98,7 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
+    classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
     def do_quit(self, arg):
         """
@@ -193,12 +210,12 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             all [BaseModel]
         """
-        classes = ["BaseModel", "User"]
-        if arg in classes or arg == "":
+        # classes = ["BaseModel", "User"]
+        if arg in self.__class__.classes or arg == "":
             all_objs = storage.all()
             all_list = []
             for key in all_objs.keys():
-                if arg in classes:
+                if arg in self.__class__.classes:
                     if str(key).startswith(arg):
                         all_list.append(str(all_objs[key]))
                 else:
@@ -219,17 +236,17 @@ class HBNBCommand(cmd.Cmd):
         """
 
         # valid classes
-        classes = ["BaseModel", "User"]
+        # classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
         try:
             class_name, id, attr_name, attr_value = arg.split()
             all_objs = storage.all()
             key = ".".join([class_name, id])
-            if class_name in classes and key in all_objs.keys():
+            if class_name in self.__class__.classes and key in all_objs.keys():
                 instance = all_objs[key]
                 setattr(instance, attr_name, attr_value)
                 instance.save()
-            elif class_name in classes:
+            elif class_name in self.__class__.classes:
                 print("** no instance found **")
             else:
                 print("** class doesn't exist **")
@@ -237,9 +254,9 @@ class HBNBCommand(cmd.Cmd):
             # when some values are missing
             if arg == "":
                 print("** class name missing **")
-            elif len(arg.split()) == 1 and arg.split()[0] in classes:
+            elif len(arg.split()) == 1 and arg.split()[0] in self.__class__.classes:
                 print("** instance id missing **")
-            elif arg.split()[0] not in classes:
+            elif arg.split()[0] not in self.__class__.classes:
                 print("** class doesn't exist **")
             elif len(arg.split()) == 2:
                 print("** attribute name missing **")
