@@ -27,14 +27,15 @@ class TestUser(unittest.TestCase):
         self.assertTrue(type(self.instance), User)
         self.assertTrue(hasattr(self.instance, "email"))
         self.assertTrue(User.email == "")
+
         # check for email attribute after saving
-        # self.instance.save()
-        # all_objs = storage.all()
-        # key = "User." + str(self.instance.id)
-        # instance_obj = all_objs[key]
-        # self.assertTrue(key in all_objs.keys())
-        # self.assertTrue(hasattr(instance_obj, "email"))
-        # storage.delete(key)
+        self.instance.save()
+        all_objs = storage.all()
+        key = "User." + str(self.instance.id)
+        instance_obj = all_objs[key]
+        self.assertTrue(key in all_objs.keys())
+        self.assertTrue(hasattr(instance_obj, "email"))
+        storage.delete(key)
 
     def test_password(self):
         self.assertTrue(type(self.instance), User)
@@ -42,13 +43,13 @@ class TestUser(unittest.TestCase):
         self.assertTrue(User.password == "")
 
         # check for email attribute after saving
-        # self.instance.save()
-        # all_objs = storage.all()
-        # key = "User." + str(self.instance.id)
-        # instance_obj = all_objs[key]
-        # self.assertTrue(key in all_objs.keys())
-        # self.assertTrue(hasattr(instance_obj, "password"))
-        # storage.delete(key)
+        self.instance.save()
+        all_objs = storage.all()
+        key = "User." + str(self.instance.id)
+        instance_obj = all_objs[key]
+        self.assertTrue(key in all_objs.keys())
+        self.assertTrue(hasattr(instance_obj, "password"))
+        storage.delete(key)
 
     def test_first_name(self):
         self.assertTrue(User.first_name == "")
