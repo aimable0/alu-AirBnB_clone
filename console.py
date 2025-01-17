@@ -18,7 +18,6 @@ Classes:
 import cmd
 import readline
 import rlcompleter
-import json
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
