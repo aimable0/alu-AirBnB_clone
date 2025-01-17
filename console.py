@@ -19,6 +19,7 @@ import cmd
 import readline
 import rlcompleter
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 import json
 
@@ -49,7 +50,7 @@ def inform_user_given_one_arg(arg):
     """
     if arg == "":
         print("** class name missing **")
-    elif arg != "BaseModel":
+    elif arg != "BaseModel" and arg != "User":
         print("** class doesn't exist **")
     else:
         print("** instance id missing **")
@@ -66,7 +67,7 @@ def inform_user_given_two_arg(class_name):
         - "** class doesn't exist **" if the class name is invalid.
         - "** no instance found **" if the instance doesn't exist.
     """
-    if class_name != "BaseModel":
+    if class_name != "BaseModel" and class_name != "User":
         print("** class doesn't exist **")
     else:
         print("** no instance found **")
@@ -121,13 +122,17 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of BaseModel and saves it to storage.
 
         Args:
-            arg (str): The class name ("BaseModel").
+            arg (str): The classes ("BaseModel", "User").
 
         Usage:
-            create BaseModel
+            create <BaseModel> or <User>
         """
         if arg.strip() == "BaseModel":
             instance = BaseModel()
+            instance.save()
+            print(instance.id)
+        elif arg.strip() == "User":
+            instance = User()
             instance.save()
             print(instance.id)
         else:
@@ -144,7 +149,7 @@ class HBNBCommand(cmd.Cmd):
             arg (str): The class name and ID separated by a space.
 
         Usage:
-            show BaseModel <id>
+            show <BaseModel> <id> or <User> <id>
         """
         try:
             class_name, id = arg.split()
@@ -165,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
             arg (str): The class name and ID separated by a space.
 
         Usage:
-            destroy BaseModel <id>
+            destroy BaseModel <id> or User <id>
         """
         try:
             class_name, id = arg.split()
@@ -188,11 +193,16 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             all [BaseModel]
         """
-        if arg == "" or arg == "BaseModel":
+        classes = ["BaseModel", "User"]
+        if arg in classes or arg == "":
             all_objs = storage.all()
             all_list = []
             for key in all_objs.keys():
-                all_list.append(str(all_objs[key]))
+                if arg in classes:
+                    if str(key).startswith(arg):
+                        all_list.append(str(all_objs[key]))
+                else:
+                    all_list.append(str(all_objs[key]))
             print(all_list)
         else:
             print("** class doesn't exist **")
@@ -207,15 +217,19 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             update <class name> <id> <attribute name> <attribute value>
         """
+
+        # valid classes
+        classes = ["BaseModel", "User"]
+
         try:
             class_name, id, attr_name, attr_value = arg.split()
             all_objs = storage.all()
             key = ".".join([class_name, id])
-            if class_name == "BaseModel" and key in all_objs.keys():
+            if class_name in classes and key in all_objs.keys():
                 instance = all_objs[key]
                 setattr(instance, attr_name, attr_value)
                 instance.save()
-            elif class_name == "BaseModel":
+            elif class_name in classes:
                 print("** no instance found **")
             else:
                 print("** class doesn't exist **")
@@ -223,9 +237,9 @@ class HBNBCommand(cmd.Cmd):
             # when some values are missing
             if arg == "":
                 print("** class name missing **")
-            elif len(arg.split()) == 1 and arg.split()[0] == "BaseModel":
+            elif len(arg.split()) == 1 and arg.split()[0] in classes:
                 print("** instance id missing **")
-            elif arg.split()[0] != "BaseModel":
+            elif arg.split()[0] not in classes:
                 print("** class doesn't exist **")
             elif len(arg.split()) == 2:
                 print("** attribute name missing **")
