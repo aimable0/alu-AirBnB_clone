@@ -11,14 +11,17 @@ Airbnb clone project is a web application designed to replicate the core functio
 --MORE TO BE ADDED---
 
 #TECHNOLOGIES USED
-.Frontend: <<added>>
-.Backend: <<added>>
+.Frontend: <<to added>>
+.Backend: PYTHON, <<more to added>>
 .Database: <<added>>
 .Other: <<added>>
 
-#LIBRARIES
--cmd module
+#LIBRARIES/MODULES
+-cmd
 -datetime
+-json
+-readline
+-uuid
 -unittest
 -<< more to be added>>
 
@@ -26,4 +29,7 @@ Airbnb clone project is a web application designed to replicate the core functio
 --steps to be published---
 
 #CONTRIBUTION
+-Project contributed to by:
+    -Aimable Nkurikiyimana
+    -Shyaka Mike
 Contributions are welcome! Feel free to open issues or submit pull requests.

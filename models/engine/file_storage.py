@@ -34,6 +34,6 @@ class FileStorage:
             pass
 
     def delete(self, key):
-        """delete an instance for instance dict and save changes ot json file"""
+        """delete an instance and save changes to storage file"""
         self.__objects.__delitem__(key)
         self.save()

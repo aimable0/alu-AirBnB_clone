@@ -2,8 +2,9 @@
 """
 HBNBCommand Module
 ===================
-This module defines the command-line interpreter (CLI) for the Holberton BNB project.
-It uses the `cmd` module to create an interactive shell for managing application objects.
+Module: command-line interpreter (CLI) for the Holberton BNB project.
+It uses the `cmd` module to:
+    -create an interactive shell for managing application objects.
 
 Features:
 # - Tab completion for commands.
