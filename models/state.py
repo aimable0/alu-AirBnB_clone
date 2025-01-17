@@ -10,4 +10,4 @@ class State(BaseModel):
         BaseModel (BaseModel): Parent class
     """
 
-    name: str = ""
+    name = ""

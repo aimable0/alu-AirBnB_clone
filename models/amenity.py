@@ -10,4 +10,4 @@ class Amenity(BaseModel):
         BaseModel (_type_): _description_
     """
 
-    name: str = ""
+    name = ""

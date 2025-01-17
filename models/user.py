@@ -3,7 +3,7 @@ from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    """create a user"""
+    """creates a user"""
 
     # public attributes of a user
     email = ""

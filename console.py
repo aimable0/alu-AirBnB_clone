@@ -269,15 +269,16 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
         except ValueError:
             # when some values are missing
+            args = len(arg.split())  # arguments 'args' after spliting input
             if arg == "":
                 print("** class name missing **")
-            elif len(arg.split()) == 1 and arg.split()[0] in self.__class__.classes:
+            elif args == 1 and arg.split()[0] in self.__class__.classes:
                 print("** instance id missing **")
             elif arg.split()[0] not in self.__class__.classes:
                 print("** class doesn't exist **")
-            elif len(arg.split()) == 2:
+            elif args == 2:
                 print("** attribute name missing **")
-            elif len(arg.split()) == 3:
+            elif args == 3:
                 print("** value missing **")
 
 

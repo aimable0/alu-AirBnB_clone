@@ -40,8 +40,9 @@ class BaseModel:
                   given values.
 
         Example:
-            base_instance = BaseModel(id="123", created_at="2025-01-01T00:00:00",
-                                      updated_at="2025-01-01T01:00:00")
+            base_instance = BaseModel(id="123",
+            created_at="2025-01-01T00:00:00",
+            updated_at="2025-01-01T01:00:00")
         """
         self.id = str(uuid4())
         self.created_at = datetime.today()
@@ -65,8 +66,9 @@ class BaseModel:
                  dictionary of its attributes.
 
         Example:
-            "[BaseModel] (1234) {'id': '1234', 'created_at': '2025-01-01T00:00:00',
-                                 'updated_at': '2025-01-01T01:00:00'}"
+            "[BaseModel] (1234) {'id': '1234',
+            'created_at': '2025-01-01T00:00:00',
+            'updated_at': '2025-01-01T01:00:00'}"
         """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
