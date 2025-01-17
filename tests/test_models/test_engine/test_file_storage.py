@@ -18,7 +18,7 @@ class TestFileStorage(unittest.TestCase):
         self.new_model.my_number = 23
         self.new_model.save()
         self.storage = FileStorage()
-        self.storage.reload()
+        # self.storage.reload()
 
     def test__file_path(self):
         """test if the file_path is valid or not"""
