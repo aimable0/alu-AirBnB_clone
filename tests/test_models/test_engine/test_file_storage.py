@@ -1,6 +1,7 @@
 import unittest
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.user import User
 import json
 
 
@@ -59,12 +60,34 @@ class TestFileStorage(unittest.TestCase):
             self.assertIn(instance.to_dict(), objs.values())
 
     def test_reload(self):
-        storage = FileStorage()
-        storage.reload()
-        all_objs = storage.all()
-        self.assertTrue(type(all_objs), dict)
-        self.assertTrue(len(all_objs) > 0)
-        self.assertTrue("reload" in FileStorage.__dict__)
+        """Test successful reload of objects from file"""
+        # Create and save some test objects
+        base_model = BaseModel()
+        user = User()
+        self.storage.new(base_model)
+        self.storage.new(user)
+        self.storage.save()
+
+        # Clear the objects dictionary
+        FileStorage._FileStorage__objects = {}
+        self.storage.reload()
+
+        # Check if objects were reloaded correctly
+        objects = self.storage.all()
+        self.assertIn(f"BaseModel.{base_model.id}", objects)
+        self.assertIn(f"User.{user.id}", objects)
+
+        # Verify object attributes
+        reloaded_base = objects[f"BaseModel.{base_model.id}"]
+        self.assertEqual(reloaded_base.id, base_model.id)
+        self.assertEqual(reloaded_base.to_dict()["__class__"], "BaseModel")
+        # storage = FileStorage()
+        # storage.reload()
+        # all_objs = storage.all()
+        # self.assertTrue(type(all_objs), dict)
+        # self.assertTrue(len(all_objs) > 0)
+        # self.assertTrue("reload" in FileStorage.__dict__)
+
 
 if __name__ == "__main__":
     unittest.main()
