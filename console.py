@@ -177,7 +177,7 @@ class HBNBCommand(cmd.Cmd):
         except ValueError:
             inform_user_given_one_arg(arg)
 
-    def do_all(self, arg="BaseModel"):
+    def do_all(self, arg):
         """
         Displays all objects in storage or all objects of a specific class.
 
@@ -187,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             all [BaseModel]
         """
-        if arg == "BaseModel":
+        if arg == "" or arg == "BaseModel":
             all_objs = storage.all()
             all_list = []
             for key in all_objs.keys():
@@ -217,15 +217,19 @@ class HBNBCommand(cmd.Cmd):
             elif class_name == "BaseModel":
                 print("** no instance found **")
             else:
-                raise Exception
+                print("** class doesn't exist **")
         except ValueError:
             # when some values are missing
             if arg == "":
                 print("** class name missing **")
-            elif arg != "BaseModel":
+            elif len(arg.split()) == 1 and arg.split()[0] == "BaseModel":
+                print("** instance id missing **")
+            elif arg.split()[0] != "BaseModel":
                 print("** class doesn't exist **")
-        except Exception:
-            print("** class doesn't exist **")
+            elif len(arg.split()) == 2:
+                print("** attribute name missing **")
+            elif len(arg.split()) == 3:
+                print("** value missing **")
 
 
 if __name__ == "__main__":
