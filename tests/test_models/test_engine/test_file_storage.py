@@ -60,8 +60,10 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         storage = FileStorage()
-        
-
+        storage.reload()
+        all_objs = storage.all()
+        self.assertTrue(type(all_objs), dict)
+        self.assertTrue(len(all_objs) > 0)
 
 if __name__ == "__main__":
     unittest.main()
