@@ -21,10 +21,10 @@ from models.base_model import BaseModel
 from models import storage
 import json
 
-#Enable tab completion
+# Enable tab completion
 readline.parse_and_bind("tab: complete")
 
-#Command history setup
+# Command history setup
 HISTORY_FILE = ".cmd_history"
 
 try:
@@ -78,6 +78,7 @@ class HBNBCommand(cmd.Cmd):
     Attributes:
         prompt (str): The command prompt displayed to the user.
     """
+
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
@@ -128,10 +129,11 @@ class HBNBCommand(cmd.Cmd):
             instance = BaseModel()
             instance.save()
             print(instance.id)
-        elif arg.strip() != "BaseModel":
-            print("** class doesn't exist **")
         else:
-            print("** class name missing **")
+            if arg == "":
+                print("** class name missing **")
+            else:
+                print("** class doesn't exist **")
 
     def do_show(self, arg):
         """
@@ -185,11 +187,14 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             all [BaseModel]
         """
-        all_objs = storage.all()
-        all_list = []
-        for key in all_objs.keys():
-            all_list.append(str(all_objs[key]))
-        print(all_list)
+        if arg == "BaseModel":
+            all_objs = storage.all()
+            all_list = []
+            for key in all_objs.keys():
+                all_list.append(str(all_objs[key]))
+            print(all_list)
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         """
@@ -199,9 +204,29 @@ class HBNBCommand(cmd.Cmd):
             arg (str): The class name, ID, attribute name, and value.
 
         Usage:
-            update BaseModel <id> <attribute name> <attribute value>
+            update <class name> <id> <attribute name> <attribute value>
         """
-        ...
+        try:
+            class_name, id, attr_name, attr_value = arg.split()
+            all_objs = storage.all()
+            key = ".".join([class_name, id])
+            if class_name == "BaseModel" and key in all_objs.keys():
+                instance = all_objs[key]
+                setattr(instance, attr_name, attr_value)
+                instance.save()
+            elif class_name == "BaseModel":
+                print("** no instance found **")
+            else:
+                raise Exception
+        except ValueError:
+            # when some values are missing
+            if arg == "":
+                print("** class name missing **")
+            elif arg != "BaseModel":
+                print("** class doesn't exist **")
+        except Exception:
+            print("** class doesn't exist **")
+
 
 if __name__ == "__main__":
     """
