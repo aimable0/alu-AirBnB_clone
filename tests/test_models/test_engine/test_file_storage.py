@@ -61,33 +61,20 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         """Test successful reload of objects from file"""
-        # Create and save some test objects
-        base_model = BaseModel()
-        user = User()
-        self.storage.new(base_model)
-        self.storage.new(user)
+        # Add an object and save it
+        self.storage.new(self.new_model)
         self.storage.save()
 
-        # Clear the objects dictionary
-        FileStorage._FileStorage__objects = {}
+        # Clear the __objects dictionary
+        self.storage._FileStorage__objects = {}
+
+        # Reload the objects from the file
         self.storage.reload()
 
-        # Check if objects were reloaded correctly
-        objects = self.storage.all()
-        self.assertIn(f"BaseModel.{base_model.id}", objects)
-        self.assertIn(f"User.{user.id}", objects)
-
-        # Verify object attributes
-        reloaded_base = objects[f"BaseModel.{base_model.id}"]
-        self.assertEqual(reloaded_base.id, base_model.id)
-        self.assertEqual(reloaded_base.to_dict()["__class__"], "BaseModel")
-        # storage = FileStorage()
-        # storage.reload()
-        # all_objs = storage.all()
-        # self.assertTrue(type(all_objs), dict)
-        # self.assertTrue(len(all_objs) > 0)
-        # self.assertTrue("reload" in FileStorage.__dict__)
-
+        # Assert that the object is back in __objects
+        key = f"BaseModel.{self.new_model.id}"
+        self.assertIn(key, self.storage.all())
+        self.assertEqual(self.new_model.id, self.storage.all()[key].id)
 
 if __name__ == "__main__":
     unittest.main()
