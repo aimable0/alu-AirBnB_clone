@@ -153,10 +153,10 @@ class HBNBCommand(cmd.Cmd):
         Creates a new instance of BaseModel and saves it to storage.
 
         Args:
-            arg (str): The classes ("BaseModel", "User").
+            arg (str): The class name.
 
         Usage:
-            create <BaseModel> or <User>
+            create <BaseModel or User or City or Amenity or Place or Review>
         """
         set_instance = {
             "BaseModel": BaseModel(),
@@ -185,7 +185,8 @@ class HBNBCommand(cmd.Cmd):
             arg (str): The class name and ID separated by a space.
 
         Usage:
-            show <BaseModel> <id> or <User> <id>
+            show <BaseModel or User or City
+                or Amenity or Place or Review> + <id>
         """
         try:
             class_name, id = arg.split()
@@ -206,7 +207,8 @@ class HBNBCommand(cmd.Cmd):
             arg (str): The class name and ID separated by a space.
 
         Usage:
-            destroy BaseModel <id> or User <id>
+            destroy <BaseModel or User or City
+                    or Amenity or Place or Review> + <id>
         """
         try:
             class_name, id = arg.split()
@@ -227,7 +229,7 @@ class HBNBCommand(cmd.Cmd):
             arg (str): The class name (optional).
 
         Usage:
-            all [BaseModel]
+            all [BaseModel, ]
         """
         # classes = ["BaseModel", "User"]
         if arg in self.__class__.classes or arg == "":
@@ -253,9 +255,6 @@ class HBNBCommand(cmd.Cmd):
         Usage:
             update <class name> <id> <attribute name> <attribute value>
         """
-
-        # valid classes
-        # classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
         try:
             class_name, id, attr_name, attr_value = arg.split()

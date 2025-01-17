@@ -4,12 +4,11 @@ from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    """_summary_
+    """Place class
 
     Args:
-        BaseModel (_type_): _description_
+        BaseModel (BaseModel): Parent class
     """
-
     # public Place attributes
     city_id: str = ""  # it will be the City.id
     user_id: str = ""  # it will be the User.id

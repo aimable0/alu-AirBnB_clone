@@ -4,10 +4,10 @@ from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """_summary_
+    """State: estate location
 
     Args:
-        BaseModel (_type_): _description_
+        BaseModel (BaseModel): Parent class
     """
 
     name: str = ""

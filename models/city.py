@@ -4,11 +4,7 @@ from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """_summary_
-
-    Args:
-        BaseModel (_type_): _description_
-    """
+    """City class that will be used to represent a city"""
 
     state_id: str = ""  # it will be the state.id
     name: str = ""

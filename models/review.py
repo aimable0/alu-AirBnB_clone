@@ -4,10 +4,10 @@ from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """_summary_
+    """Review class for customer reviews
 
     Args:
-        BaseModel (_type_): _description_
+        BaseModel (BaseModel): Parent class
     """
 
     place_id: str = ""  # it will be the Place.id
