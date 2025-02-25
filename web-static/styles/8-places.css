@@ -1,0 +1,98 @@
+.places {
+    margin-top: 30px;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.places > h1 {
+    font-size: 30px;
+}
+.list-places {
+    display: flex;
+    flex-wrap: wrap;
+}
+article {
+    display: inline-block;
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.name_price {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.name_price > h2 {
+    flex: 1;
+    display: flex;
+    font-size: 30px;
+    justify-content: center;
+    text-align: center;
+}
+
+span {
+    font-weight: bold;
+}
+
+.price_by_night {
+    color: #FF5A5F;
+    border: 3.5px solid #FF5A5F;
+    border-radius: 50px;
+    min-width: 60px;
+    height: 60px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.information {
+    height: 80px;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align:start;
+}
+
+.user {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.max_guest {
+    background-image: url(../images/group.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: top;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 90%;
+}
+.number_rooms {
+    background-image: url(../images/icon_bed.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: top;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 90%;
+}
+.number_bathrooms {
+    background-image: url(../images/icon_bath.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: top;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 90%;
+}
